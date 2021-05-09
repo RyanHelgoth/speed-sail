@@ -1,2 +1,2 @@
 # video-speed-selector  
-Python script that changes the video speed in google chrome.
+Google Chrome extention that changes playback speed of videos in the current tab.
