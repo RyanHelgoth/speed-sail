@@ -1,13 +1,15 @@
-var vidSpeed = 1.0;
-var confirmButton = document.getElementById("confirmButton");
 
 
-if (confirmButton !== null) {
-    confirmButton.addEventListener("click", function() {
-        vidSpeed = document.getElementById("numBox").value;
-        document.querySelector('video').playbackRate = vidSpeed;
-    });
+
+
+//https://stackoverflow.com/a/40666096
+chrome.storage.local.get('speed', function (items) {
+    setVideoSpeed(items.speed);
+    chrome.storage.local.remove('speed');
+});
+
+function setVideoSpeed(speed){
+    document.querySelector('video').playbackRate = speed;
 }
 
 
-//document.querySelector('video').playbackRate = 2.0
