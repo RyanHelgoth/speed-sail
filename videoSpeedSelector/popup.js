@@ -4,13 +4,38 @@ var confirmButton = document.getElementById("confirmButton");
 var speedSlider = document.getElementById("speedSlider");
 var sliderNum = document.getElementById("sliderNum");
 
+//Finds current video speed
+chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        files: ["currentSpeed.js"]
+    });
+});
+
+
+chrome.storage.onChanged.addListener(test);
+
+function test(changes, namespace) {
+    chrome.storage.local.get("lastSpeed", function (items) {
+        if (typeof items.lastSpeed !== 'undefined') { 
+            speedSlider.value = items.lastSpeed;
+            sliderNum.innerText = items.lastSpeed;
+        }
+    });
+    chrome.storage.onChanged.removeListener(test);
+}
+
+
+
 // Speed stays if page is refreshed, should probably use a foreground script to find speed.
 chrome.storage.local.get("lastSpeed", function (items) {
     if (typeof items.lastSpeed !== 'undefined') { 
+      
         speedSlider.value = items.lastSpeed;
         sliderNum.innerText = items.lastSpeed;
     }
 });
+
 
 
 
