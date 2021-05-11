@@ -1,8 +1,14 @@
 console.log("at currentSpeed");
 
-var currentSpeed = document.querySelector('video').playbackRate;
+var video = document.querySelector('video');
+
+if (video !== null) {
+    var currentSpeed = video.playbackRate;
+    chrome.storage.local.set({
+        lastSpeed: currentSpeed
+    });
+}
 
 
-chrome.storage.local.set({
-    lastSpeed: currentSpeed
-});
+
+

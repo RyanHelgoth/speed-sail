@@ -6,10 +6,12 @@ var sliderNum = document.getElementById("sliderNum");
 
 //Finds current video speed
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        files: ["currentSpeed.js"]
-    });
+    if (tabs[0].url.startsWith("https://")) {//Maybe check http too?
+        chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            files: ["currentSpeed.js"]
+        });
+    }
 });
 
 
@@ -75,8 +77,12 @@ confirmButton.addEventListener("click", function() {
 
 
 function executeForegroundScript(tabs) {
-    chrome.scripting.executeScript({
-        target: { tabId: tabs[0].id },
-        files: ["foreground.js"]
-    });
+    if (tabs[0].url.startsWith("https://")) { //Maybe check http too?
+
+    
+        chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            files: ["foreground.js"]
+        });
+    }
 }
