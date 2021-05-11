@@ -20,7 +20,7 @@
     "host_permissions": [
         "https://www.google.ca/*",
         "https://www.youtube.com/*",
-        "https://www.youtube.com/watch?v=HVsySz-h9r4"
+        "https://www.youtube.com/watch?v=HVsySz-h9r4" 
     ]
 
 
