@@ -12,14 +12,20 @@ chrome.storage.local.get('speed', function (items) {
 
 function setVideoSpeed(speed){
     console.log(speed);
-    var video = document.querySelector('video');
+    var videos = document.querySelectorAll('video');
+    console.log(videos);
 
-    if (video !== null) {
-        video.playbackRate = speed;
-        chrome.storage.local.set({
-            lastSpeed: speed
-        });
-    }
+
+    videos.forEach(function(video) {
+        if (video !== null) {
+            video.playbackRate = speed;
+        }
+    });
+
+    chrome.storage.local.set({
+        lastSpeed: speed
+    });
+    
     
 
     
