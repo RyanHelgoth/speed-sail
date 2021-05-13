@@ -1,52 +1,66 @@
 
 
-var confirmButton = document.getElementById("confirmButton");
-var speedSlider = document.getElementById("speedSlider");
-var sliderNum = document.getElementById("sliderNum");
-
-//Finds current video speed
-chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    if (tabs[0].url.startsWith("https://")) {//Maybe check http too?
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            files: ["currentSpeed.js"]
-        });
-    }
-});
 
 
-chrome.storage.onChanged.addListener(test);
+main();
 
-function test(changes, namespace) {
+
+
+
+function main() {
+    //Add to function?
+    const speedSlider = document.getElementById("speedSlider"); 
+    const sliderNum = document.getElementById("sliderNum");
+
+    addListeners(); 
+    getCurrentSpeed();
+    setSlider();
+    
+}
+
+
+function getCurrentSpeed() {
+    //Finds current video speed and saves it to storage
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        if (tabs[0].url.startsWith("https://")) {//Maybe check http too?
+            chrome.scripting.executeScript({
+                target: { tabId: tabs[0].id },
+                files: ["currentSpeed.js"]
+            });
+        }
+    });
+}
+
+function setSlider() {
+    //When popup opens, sets slider if speed was not changed.
     chrome.storage.local.get("lastSpeed", function (items) {
         if (typeof items.lastSpeed !== 'undefined') { 
+            console.log("setting ui");
             speedSlider.value = items.lastSpeed;
             sliderNum.innerText = items.lastSpeed;
         }
     });
-    chrome.storage.onChanged.removeListener(test);
+
+    
+
+}
+
+function addListeners() {
+    //Doesn't work twice in a row because data stays the same (doesnt look for write, only data change)
+    //When popup opens, sets slider if speed has changed.
+    chrome.storage.onChanged.addListener(handleSpeedChange);
+    
+    //https://www.impressivewebs.com/onchange-vs-oninput-for-range-sliders/
+    speedSlider.addEventListener('input', setSpeed, false);
+
 }
 
 
-
-// Speed stays if page is refreshed, should probably use a foreground script to find speed.
-chrome.storage.local.get("lastSpeed", function (items) {
-    if (typeof items.lastSpeed !== 'undefined') { 
-      
-        speedSlider.value = items.lastSpeed;
-        sliderNum.innerText = items.lastSpeed;
-    }
-});
-
-
-
-
-//https://www.impressivewebs.com/onchange-vs-oninput-for-range-sliders/
-speedSlider.addEventListener('input', function () { //See if i can change to an on release listener
+function setSpeed() {
     var vidSpeed = speedSlider.value;
-    
+
     sliderNum.innerText = vidSpeed;
-    
+
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
 
@@ -54,36 +68,33 @@ speedSlider.addEventListener('input', function () { //See if i can change to an 
         chrome.storage.local.set({
             speed: vidSpeed
         }, executeForegroundScript(tabs)); // Callback invoked after storing is complete.
-        
-    });
-  }, false);
-
-
-
-
-confirmButton.addEventListener("click", function() {
-    var vidSpeed = document.getElementById("numBox").value;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-
-
-        //https://stackoverflow.com/a/40666096
-        chrome.storage.local.set({
-            speed: vidSpeed
-        }, executeForegroundScript(tabs)); // Callback invoked after storing is complete.
-        
     });
 
-});
+}
 
 
-function executeForegroundScript(tabs) {
+//Handles change in speed after reopening the popup
+function handleSpeedChange(changes, namespace) {
+    chrome.storage.local.get("lastSpeed", function (items) {
+        if (typeof items.lastSpeed !== 'undefined') { 
+            console.log("setting ui");
+            speedSlider.value = items.lastSpeed;
+            sliderNum.innerText = items.lastSpeed;
+        }
+    });
+    chrome.storage.onChanged.removeListener(handleSpeedChange);
+}
+
+
+function executeForegroundScript(tabs) {//Rename function
     if (tabs[0].url.startsWith("https://")) { //Maybe check http too?
 
     
         chrome.scripting.executeScript({
             target: { tabId: tabs[0].id },
-            files: ["foreground.js"]
+            files: ["foreground.js"]//Rename file
         });
     }
 }
+
 

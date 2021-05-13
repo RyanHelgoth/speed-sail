@@ -19,12 +19,13 @@ function setVideoSpeed(speed){
     videos.forEach(function(video) {
         if (video !== null) {
             video.playbackRate = speed;
+            chrome.storage.local.set({
+                lastSpeed: speed
+            });
+            
         }
     });
 
-    chrome.storage.local.set({
-        lastSpeed: speed
-    });
     
     
 
