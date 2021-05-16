@@ -7,7 +7,7 @@ if (video !== null) {
     console.log(currentSpeed);
     
     chrome.storage.local.set({
-        lastSpeed: currentSpeed
+        currentSpeed: currentSpeed
     });
 }
 

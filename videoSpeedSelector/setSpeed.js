@@ -1,12 +1,9 @@
 
-
-
-
 //https://stackoverflow.com/a/40666096
-chrome.storage.local.get('speed', function (items) {
-    if (typeof items.speed !== 'undefined') { // Prevents errors if slider is moved too fast which stores an undefined value
-        setVideoSpeed(items.speed);
-        chrome.storage.local.remove('speed'); //clear() instead?
+chrome.storage.local.get('selectedSpeed', function (items) {
+    if (typeof items.selectedSpeed !== 'undefined') { // Prevents errors if slider is moved too fast which stores an undefined value
+        setVideoSpeed(items.selectedSpeed);
+        chrome.storage.local.remove('selectedSpeed'); //clear() instead?
     }
 });
 
@@ -20,7 +17,7 @@ function setVideoSpeed(speed){
         if (video !== null) {
             video.playbackRate = speed;
             chrome.storage.local.set({
-                lastSpeed: speed
+                currentSpeed: speed
             });
             
         }
