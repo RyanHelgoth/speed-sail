@@ -27,7 +27,7 @@ function getCurrentSpeed() {
         if (tabs[0].url.startsWith("https://") || tabs[0].url.startsWith("http://")) {
             chrome.scripting.executeScript({
                 target: {tabId: tabs[0].id},
-                files: ["currentSpeed.js"]
+                files: ["contentScripts/getCurrentSpeed.js"]
             });
         }
     });
@@ -82,10 +82,9 @@ function handleSpeedChange(changes, namespace) {
 //Executes script responsible for setting video speed in the current tab.
 function executeSetSpeedScript(tabs) {
     if (tabs[0].url.startsWith("https://") || tabs[0].url.startsWith("http://")) { 
-
         chrome.scripting.executeScript({
             target: {tabId: tabs[0].id},
-            files: ["setSpeed.js"]
+            files: ["contentScripts/setSpeed.js"]
         });
     }
 }
