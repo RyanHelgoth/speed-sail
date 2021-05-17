@@ -26,7 +26,7 @@ function getCurrentSpeed() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         if (tabs[0].url.startsWith("https://") || tabs[0].url.startsWith("http://")) {
             chrome.scripting.executeScript({
-                target: {tabId: tabs[0].id},
+                target: {tabId: tabs[0].id, allFrames: true},
                 files: ["contentScripts/getCurrentSpeed.js"]
             });
         }
@@ -83,7 +83,7 @@ function handleSpeedChange(changes, namespace) {
 function executeSetSpeedScript(tabs) {
     if (tabs[0].url.startsWith("https://") || tabs[0].url.startsWith("http://")) { 
         chrome.scripting.executeScript({
-            target: {tabId: tabs[0].id},
+            target: {tabId: tabs[0].id, allFrames: true},
             files: ["contentScripts/setSpeed.js"]
         });
     }
