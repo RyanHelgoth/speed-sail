@@ -15,6 +15,13 @@ function main() {
 
 //Sets speed of all videos in current tab.
 function setVideoSpeed() {
+
+    //TODO remove lines below when done testing
+    chrome.storage.local.get("currentSpeed", function (items) {
+        if (typeof items.currentSpeed !== "undefined") { 
+            console.log("currentSpeed"+items.currentSpeed);
+        }
+    });
     /*  Link: https://stackoverflow.com/a/40666096
         Author: Makyen♦
         Date: Nov 17 '16 at 22:20
@@ -26,7 +33,7 @@ function setVideoSpeed() {
     chrome.storage.local.get("selectedSpeed", function (items) {
         let selectedSpeed = items.selectedSpeed;
         let speedSet = false;
-        console.log(selectedSpeed); //for testing, can remove after done development
+        console.log("selectedSpeed"+selectedSpeed); //for testing, can remove after done development
         
         //Prevents errors if slider is moved too fast which can leave speed undefined.
         if (typeof selectedSpeed !== "undefined") { 
@@ -55,9 +62,10 @@ function setVideoSpeed() {
 //Saves the speed selected by the user in storage if it has been applied to at least one video.
 function saveCurrentSpeed(speedSet, selectedSpeed) {
     if (speedSet) {
-        chrome.storage.local.remove("selectedSpeed"); 
+        chrome.storage.local.remove("currentSpeed"); 
         chrome.storage.local.set({
             currentSpeed: selectedSpeed
+            
         });
     }
 }
