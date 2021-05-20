@@ -38,7 +38,6 @@ function setVideoSpeed() {
         //Prevents errors if slider is moved too fast which can leave speed undefined.
         if (typeof selectedSpeed !== "undefined") { 
             let videos = document.querySelectorAll("video"); //Returns NodeList 
-            
             /*  Link: https://developer.mozilla.org/en-US/docs/Web/API/NodeList#example
                 Author: Various MDN contributers, 
                     full list: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/contributors.txt
@@ -65,7 +64,16 @@ function saveCurrentSpeed(speedSet, selectedSpeed) {
         chrome.storage.local.remove("currentSpeed"); 
         chrome.storage.local.set({
             currentSpeed: selectedSpeed
-            
+        });
+
+        /*speedSet needs to only be set to true here because this script
+        is executed once for each iframe. So if the last iframe that is processed
+        contains no videos, then speedSet will be set to false even if there was
+        at least one video that did have it's speed set in a different iframe.
+        */
+        //speedSet is set to false initially in popup.js when user selects a speed.
+        chrome.storage.local.set({
+            speedSet: speedSet
         });
     }
 }
