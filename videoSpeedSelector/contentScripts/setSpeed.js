@@ -13,7 +13,7 @@ function main() {
     setVideoSpeed();
 }
 
-//Sets speed of all videos in current tab.
+//Sets speed of all videos and audio tracks in current tab.
 function setVideoSpeed() {
 
     //TODO remove lines below when done testing
@@ -38,6 +38,7 @@ function setVideoSpeed() {
         //Prevents errors if slider is moved too fast which can leave speed undefined.
         if (typeof selectedSpeed !== "undefined") { 
             let videos = document.querySelectorAll("video"); //Returns NodeList 
+            let audioTracks = document.querySelectorAll("audio"); //Returns NodeList 
             /*  Link: https://developer.mozilla.org/en-US/docs/Web/API/NodeList#example
                 Author: Various MDN contributers, 
                     full list: https://developer.mozilla.org/en-US/docs/Web/API/NodeList/contributors.txt
@@ -50,6 +51,12 @@ function setVideoSpeed() {
             for (video of videos) { 
                 if (video !== null) {
                     video.playbackRate = selectedSpeed;
+                    speedSet = true; 
+                }
+            }
+            for (audioTrack of audioTracks) {
+                if (audioTrack !== null) {
+                    audioTrack.playbackRate = selectedSpeed;
                     speedSet = true; 
                 }
             }
