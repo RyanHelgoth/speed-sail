@@ -1,18 +1,13 @@
 {
     "name": "Video Speed Selector",
     "description": "Set video playback speed on any webpage.",
-    "version": "1.0",
+    "version": "1.0.0",
     "manifest_version": 3,
-    "background": {
-        "service_worker": "./background.js"
-    },
-    "options_page": "./options.html",
     "action": {
         "default_popup": "popup.html"
     },
     "permissions": [
         "storage",
-        "tabs",
         "activeTab",
         "scripting"
     ],
@@ -21,6 +16,4 @@
         "https://*/*",
         "file://*/*"  
     ]
-
-
 }
