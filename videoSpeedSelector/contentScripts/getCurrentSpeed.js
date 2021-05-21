@@ -18,7 +18,7 @@ function saveCurrentSpeed() {
 
     if (video !== null) {
         let currentSpeed = video.playbackRate;
-        
+        console.log(currentSpeed);
         chrome.storage.local.set({
             currentSpeed: currentSpeed
         });
