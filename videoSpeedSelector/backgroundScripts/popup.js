@@ -130,7 +130,9 @@ function executeSetSpeedScript(tabs) {
 
 /*TODO:
 -Uninstall extension and see if current speed causes bugs (when it is undefined)
--Update issue on github explaining why im not preventing spam clicks anymore
 -Move executeSetSpeedScript code into setSpeed?
--Delete unecissary files.
+-ui
+-clean up testing code and comments
+-Check spelling in ui
+
 */

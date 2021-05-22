@@ -1,0 +1,74 @@
+
+h2, h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+body {
+    background-color: rgb(66, 66, 66);
+    width: 400px;
+    height: 225px;
+    
+    
+}
+
+#container {
+    
+    background-color: rgb(87, 87, 87);
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    
+
+}
+#title {
+    text-align: center;
+    vertical-align: center;
+
+}
+
+#instructions {
+    text-align: center;
+}
+
+#speedDisplay {
+    background-color: rgb(58, 37, 172);
+    text-align: center;
+    
+}
+
+#selectedSpeedDisplay {
+    background-color: rgb(37, 172, 37);
+    display: inline-block;
+    
+}
+
+#lastSpeedDisplay {
+    background-color: rgb(172, 163, 41);
+    display: inline-block;
+ 
+}
+
+#input {
+    clear: both;
+    background-color: rgb(65, 7, 131);
+    text-align: center;
+}
+
+#applyButton {
+    display: inline-block;
+}
+
+#defaultButton {
+    display: inline-block;
+}
+
+#speedSlider {
+    margin: auto;
+    width: 95%;
+}
+
+#status {
+    clear: both;
+    text-align: center;
+}
