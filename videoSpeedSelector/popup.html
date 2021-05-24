@@ -9,14 +9,16 @@
             <div id="title">
                 <h2>Video Speed Selector</h2>
             </div>
-            <hr>
             <div id="instructions">
-                <p>
-                    -Please select a speed with the slider and then click "Apply Speed"
-                    to change the speed of videos and audio clips in the current tab.
-                    -Click "Default Speed" to reset the speed of videos and audio clips in
-                    the current tab.
-                </p>
+                <ul id="instructionsList">
+                    <li>Please select a speed with the slider and then click "Apply Speed"
+                        to change the speed of videos and audio clips in the current tab.
+                    </li>
+                    <li>
+                        Click "Default Speed" to reset the speed of videos and audio clips in
+                        the current tab.
+                    </li>
+                </ul>
             </div>
             <div id="speedDisplay">
                 <div id="selectedSpeedDisplay"> 
@@ -24,7 +26,7 @@
                     <span id="sliderNum">1</span><span>&times;</span>
                 </div>
                 <div id="lastSpeedDisplay">
-                    <h4>Last applied speed:</h4>
+                    <h4>Last Applied Speed:</h4>
                     <span id="appliedSpeed">1</span><span>&times;</span>
                 </div>
             </div>
