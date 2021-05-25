@@ -17,7 +17,33 @@ ul {
     list-style: inside;
     text-align: center;  
     vertical-align: middle;
-  }
+}
+
+button {
+    background-color: rgba(200, 200, 200, 0.25); 
+    border: none;
+    color: rgb(255, 255, 255, 0.5);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 2px;
+    padding: 5px;
+    
+
+}
+
+button:hover {
+    transition-duration: 0.25s;
+    background-color: rgb(88, 60, 133); 
+    
+}
+
+button:active {
+    transition-duration: 0.01s;
+    background-color: rgb(88, 60, 133, 0.5); 
+    
+}
 
 body {
     margin: 0;
@@ -65,20 +91,17 @@ body {
     background-color: rgba(200, 200, 200, 0.25);
     display: inline-block;
     position: relative;
-    right: 2%;
+    right: 0%;
     padding: 10px;
     border-radius: 5px;
     width: 40%
-    
-
-    
 }
 
 #lastSpeedDisplay {
     background-color: rgba(200, 200, 200, 0.25);
     display: inline-block;
     position: relative;
-    left: 2%;
+    left: 0%;
     padding: 10px;
     border-radius: 5px;
     width: 40%
@@ -96,17 +119,56 @@ body {
 }
 
 #applyButton {
-    display: inline-block;
+    position: relative;
+    width: 45%;
+    right: 0%;
+    
 }
 
 #defaultButton {
-    display: inline-block;
+    position: relative;
+    width: 45%;
+    left: 0%;
+    
+    
 }
 
+/*  https://www.w3schools.com/howto/howto_js_rangeslider.asp
+
+
+*/
 #speedSlider {
-    margin: auto;
-    width: 96%;
+    -webkit-appearance: none;  
+    appearance: none;
+    outline: none;
+    border-radius: 10px;
+    background: rgba(200, 200, 200, 0.25);
+    opacity: 1;
+    -webkit-transition: 0.25s; 
+    transition: opacity 0.25s;
+
+
+
+    margin-bottom: 5px;
+    width: 91.5%;
+    height: 10px;
 }
+
+#speedSlider:hover {
+    opacity: 0.75;
+  }
+
+
+#speedSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgb(175, 175, 175);
+    cursor: pointer;
+}
+
 
 #status {
     clear: both;
@@ -114,3 +176,4 @@ body {
     padding: 10px;
     vertical-align: middle;
 }
+
