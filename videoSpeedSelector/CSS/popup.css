@@ -1,5 +1,5 @@
 
-h2, h4 {
+h1, h2, h4 {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -52,43 +52,47 @@ body {
     color: rgb(255, 255, 255, 0.5);
     background-color: rgb(54, 54, 54);
     width: 400px;
-    height: 295px; 
+    height: 300px; 
 }
 
 #container {
-    background-color: rgb(5, 20, 39);
+    background-color: rgb(12, 19, 29);
     margin-left: auto;
     margin-right: auto;
     height: 100%;
+    border: 3px solid rgba(200, 200, 200, 0.1); 
     
 
 }
 #title {
+    font-size: 12px;
     text-align: center;
     vertical-align: center;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: rgb(255, 255, 255, 0.70);
+    
+    background-color: rgba(200, 200, 200, 0.1); 
 
 }
 
 #instructions {
-    border-top: 2px solid rgba(255, 255, 255, 0.75);
+    border-top: 0px solid rgba(200, 200, 200, 0.1);
     
 }
 
 
 #speedDisplay {
-    border-top: 1px solid rgba(255, 255, 255, 0.75);
-    background-color: rgb(5, 20, 39);
+    margin: 0;
     text-align: center;
     font-size: medium;
-    padding-top: 5px;
-    padding-bottom: 5px;
+
+    
     
 }
 
 #selectedSpeedDisplay {
-    background-color: rgba(200, 200, 200, 0.25);
+    background: rgba(200, 200, 200, 0.25);
     display: inline-block;
     position: relative;
     right: 0%;
@@ -98,7 +102,7 @@ body {
 }
 
 #lastSpeedDisplay {
-    background-color: rgba(200, 200, 200, 0.25);
+    background: rgba(200, 200, 200, 0.25);
     display: inline-block;
     position: relative;
     left: 0%;
@@ -111,25 +115,20 @@ body {
 
 #input {
     clear: both;
-    background-color: rgb(5, 20, 39);
+    
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.75);
-    padding-top: 5px;
-    padding-bottom: 5px;
+    
 }
 
 #applyButton {
     position: relative;
     width: 45%;
-    right: 0%;
     
 }
 
 #defaultButton {
     position: relative;
-    width: 45%;
-    left: 0%;
-    
+    width: 45%;  
     
 }
 
@@ -148,9 +147,9 @@ body {
     transition: opacity 0.25s;
 
 
-
-    margin-bottom: 5px;
-    width: 91.5%;
+    
+    margin: 15px;
+    width: 91%;
     height: 10px;
 }
 
@@ -167,6 +166,11 @@ body {
     border-radius: 50%;
     background: rgb(175, 175, 175);
     cursor: pointer;
+}
+
+#speedSlider::-webkit-progress-value {
+    -webkit-appearance: none;
+    background-color: orange;
 }
 
 
