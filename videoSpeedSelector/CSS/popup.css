@@ -35,13 +35,13 @@ button {
 
 button:hover {
     transition-duration: 0.25s;
-    background-color: rgb(88, 60, 133); 
+    background-color: rgba(200, 200, 200, 0.50); 
     
 }
 
 button:active {
     transition-duration: 0.01s;
-    background-color: rgb(88, 60, 133, 0.5); 
+    background-color: rgba(200, 200, 200, 0.125); 
     
 }
 
@@ -60,7 +60,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     height: 100%;
-    border: 3px solid rgba(200, 200, 200, 0.1); 
+    border: 3px solid rgba(200, 200, 200, 0.125); 
     
 
 }
@@ -72,7 +72,7 @@ body {
     padding-bottom: 5px;
     color: rgb(255, 255, 255, 0.70);
     
-    background-color: rgba(200, 200, 200, 0.1); 
+    background-color: rgba(200, 200, 200, 0.125); 
 
 }
 
@@ -145,12 +145,19 @@ body {
     opacity: 1;
     -webkit-transition: 0.25s; 
     transition: opacity 0.25s;
-
-
-    
     margin: 15px;
     width: 91%;
     height: 10px;
+
+    /*  Link: https://stackoverflow.com/a/57153340
+        Author: dargue3
+        Date: Jul 22 '19 at 20:32
+        License: SA 4.0
+
+        I used this post to learn how to fill the left 
+        of a range slider in with color in chrome.
+    */
+    background: linear-gradient(to right, rgba(200, 200, 200, 0.50) 0%, rgba(200, 200, 200, 0.50) 6.25%, rgba(200, 200, 200, 0.25) 6.25%, rgba(200, 200, 200, 0.25) 100%);
 }
 
 #speedSlider:hover {
@@ -168,10 +175,7 @@ body {
     cursor: pointer;
 }
 
-#speedSlider::-webkit-progress-value {
-    -webkit-appearance: none;
-    background-color: orange;
-}
+
 
 
 #status {

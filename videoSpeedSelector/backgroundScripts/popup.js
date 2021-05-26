@@ -39,10 +39,24 @@ function initializeUi() {
     });
 }
 
-//Sets selected speed text.
-function setSelectedSpeedText() {
+//Updates ui elements that should change after slider is moved.
+function updateUi() {
     let selectedSpeed = speedSlider.value;
+    let leftColor = "rgba(200, 200, 200, 0.50)";
+    let rightColor = "rgba(200, 200, 200, 0.25)";
+    let percentFilled = (selectedSpeed/16)*100;
+
     sliderNum.innerText = selectedSpeed;
+    
+    /*  Link: https://stackoverflow.com/a/57153340
+        Author: dargue3
+        Date: Jul 22 '19 at 20:32
+        License: SA 4.0
+
+        I used this post to learn how to fill the left 
+        of a range slider in with color in chrome.
+    */
+    speedSlider.style.background = "linear-gradient(to right," + leftColor+" 0%," + leftColor + percentFilled + "%," + rightColor + percentFilled + "%," + rightColor + "100%)";
 }
 
 //Adds listeners.
@@ -58,7 +72,7 @@ function addListeners() {
     defaultButton.addEventListener("click", setDefaultSpeed, false); 
 
     //Catches changes in speed slider position
-    speedSlider.addEventListener("input", setSelectedSpeedText, false);
+    speedSlider.addEventListener("input", updateUi, false);
 }
 
 //Set speed of videos in current tab to the speed the user has selected.
@@ -82,8 +96,12 @@ function setSpeed() {
 
 //Sets slider to speed of 1 and then attempts to apply it to the current tab.
 function setDefaultSpeed() {
+    let leftColor = "rgba(200, 200, 200, 0.50)";
+    let rightColor = "rgba(200, 200, 200, 0.25)";
+    
     speedSlider.value = "1";
     sliderNum.innerText = "1";
+    speedSlider.style.background = "linear-gradient(to right, " + leftColor + " 0%," + leftColor + "6.25%," + rightColor + " 6.25%," + rightColor + " 100%)";
     setSpeed();
 }
 
