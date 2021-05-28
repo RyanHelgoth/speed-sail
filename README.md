@@ -6,6 +6,7 @@
 
 # Which websites does it support?
 - The extension works on YouTube, Reddit, Twitter, Facebook, and most other websites!  
+- It also should support PDF's, but this has not been tested. 
 - NOTE: While the extension does work on most sites, not all sites are currently supported such as Spotify and Soundcloud.
 
 # Who worked on it?
