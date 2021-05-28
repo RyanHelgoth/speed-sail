@@ -1,5 +1,5 @@
 # What is it?
-- This is a Google Chrome extention that allows the user to change the playback speed of all videos and audio tracks in the current tab.
+- This is a Google Chrome extension that allows the user to change the playback speed of all videos and audio tracks in the current tab.
 
 # Where can I install it?
 - Once it is completed, you will be able to install this extension for free from the chrome extension store. The installation link will be posted here when the extension is available.
