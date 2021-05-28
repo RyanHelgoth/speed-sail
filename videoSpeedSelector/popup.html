@@ -1,9 +1,11 @@
+<!--All HTML written by Ryan Helgoth, any resources used are commented.-->
+<!--This file contains the layout for the extension's popup-->
+
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="CSS/popup.css"/>
     </head>
-
     <body>
         <div id="container">
             <div id="title">
@@ -31,18 +33,14 @@
                 </div>
             </div>
             <div id="input">  
-                <input type="range" min="0.25" max="16" value="1" step="0.25" class="slider" id="speedSlider">          
-                <br>       
+                <input id="speedSlider" type="range" min="0.25" max="16" value="1" step="0.25">               
                 <button id="applyButton">Apply Speed</button>
-                <button id="defaultButton">Default Speed (1&times;)</button>
-                
+                <button id="defaultButton">Default Speed (1&times;)</button> 
             </div>
             <div id="status">
                 <span id="message"></span>
             </div>
-            
         </div>
         <script src="backgroundScripts/popup.js"></script>
     </body>
-
 </html>

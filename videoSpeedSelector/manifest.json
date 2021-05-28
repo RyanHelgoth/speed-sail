@@ -1,6 +1,6 @@
 {
     "name": "Video Speed Selector",
-    "description": "Set video playback speed on any webpage.",
+    "description": "Change the playback speed of all videos and audio tracks in your current tab.",
     "version": "1.0.0",
     "manifest_version": 3,
     "action": {

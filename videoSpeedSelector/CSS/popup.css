@@ -1,13 +1,15 @@
+/*All CSS written by Ryan Helgoth, any resources used are commented.
+
+This file contains style for the extension's popup.
+*/
 
 h1, h2, h4 {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-
 li {
     padding-bottom: 5px;
-
 }
 
 ul {
@@ -23,26 +25,22 @@ button {
     background-color: rgba(200, 200, 200, 0.25); 
     border: none;
     color: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
     font-size: 12px;
     border-radius: 2px;
     padding: 5px;
-    
-
 }
 
 button:hover {
-    transition-duration: 0.25s;
+    transition: 0.25s;
     background-color: rgba(200, 200, 200, 0.50); 
-    
 }
 
 button:active {
-    transition-duration: 0.01s;
-    background-color: rgba(200, 200, 200, 0.125); 
-    
+    transition: 0.01s;
+    background-color: rgba(200, 200, 200, 0.125);
 }
 
 body {
@@ -56,13 +54,10 @@ body {
 
 #container {
     background-color: rgb(27, 27, 27);
-    margin-left: auto;
-    margin-right: auto;
     height: 100%;
     border: 3px solid rgba(200, 200, 200, 0.125); 
-    
-
 }
+
 #title {
     font-size: 12px;
     text-align: center;
@@ -70,32 +65,23 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
     color: rgba(255, 255, 255, 0.75);
-    
     background-color: rgba(200, 200, 200, 0.125); 
-
 }
 
 #instructions {
     margin-left: 12px;
     margin-right: 12px;
     text-align: center;
-    
 }
 
-
 #speedDisplay {
-    margin: 0;
     text-align: center;
-    font-size: medium;
-
-    
-    
+    font-size: medium; 
 }
 
 #selectedSpeedDisplay {
     background: rgba(200, 200, 200, 0.25);
     display: inline-block;
-    position: relative;
     padding: 10px;
     border-radius: 5px;
     width: 40%
@@ -104,49 +90,32 @@ body {
 #lastSpeedDisplay {
     background: rgba(200, 200, 200, 0.25);
     display: inline-block;
-    position: relative;
     padding: 10px;
     border-radius: 5px;
     width: 40%
-    
- 
 }
 
 #input {
-    clear: both;
-    
     text-align: center;
-    
 }
 
 #applyButton {
-    position: relative;
-    width: 178px;
-    
+    width: 178px;  
 }
 
 #defaultButton {
-    position: relative;
-    width: 178px;  
-    
+    width: 178px;   
 }
 
-/*  https://www.w3schools.com/howto/howto_js_rangeslider.asp
-
-
-*/
 #speedSlider {
-    -webkit-appearance: none;  
     appearance: none;
     outline: none;
     border-radius: 10px;
     background: rgba(200, 200, 200, 0.25);
-    opacity: 1;
-    -webkit-transition: 0.25s; 
-    transition: opacity 0.25s;
-    margin: 15px;
+    transition: 0.25s;
     width: 360px;
     height: 10px;
+    margin: 15px;
 
     /*  Link: https://stackoverflow.com/a/57153340
         Author: dargue3
@@ -156,26 +125,23 @@ body {
         I used this post to learn how to fill the left 
         of a range slider in with color in chrome.
     */
-    background: linear-gradient(to right, rgba(200, 200, 200, 0.50) 0%, rgba(200, 200, 200, 0.50) 6.25%, rgba(200, 200, 200, 0.25) 6.25%, rgba(200, 200, 200, 0.25) 100%);
+    background: linear-gradient(to right, rgba(200, 200, 200, 0.50) 0%, 
+    rgba(200, 200, 200, 0.50) 6.25%, rgba(200, 200, 200, 0.25) 6.25%, 
+    rgba(200, 200, 200, 0.25) 100%);
+}
+
+#speedSlider::-webkit-slider-thumb {
+    appearance: none;
+    border-radius: 50%;
+    background: rgb(180, 180, 180);
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
 }
 
 #speedSlider:hover {
     opacity: 0.65;
   }
-
-
-#speedSlider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.65);
-    cursor: pointer;
-}
-
-
-
 
 #status {
     text-align: center;
