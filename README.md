@@ -5,7 +5,7 @@ This is a Google Chrome extention that allows the user to change the playback sp
 Once it is completed, you will be able to install this extension from the chrome extension store. I will post the link here when it is available.
 
 # Who worked on it?
-Ryan Helgoth - Wrote all JavaScript, HTML, and CSS.
+Ryan Helgoth - Wrote all JavaScript, HTML, and CSS.  
 Jonah Farkasdi - Made logos and promotional image.
 
 
