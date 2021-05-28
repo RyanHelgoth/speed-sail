@@ -9,7 +9,7 @@
 - NOTE: While the extension does work on most sites, not all sites are currently supported such as Spotify and Soundcloud.
 
 # Who worked on it?
-- Ryan Helgoth - Wrote all JavaScript, HTML, and CSS.  
+- Ryan Helgoth - Wrote all JavaScript, HTML, and CSS (references used are cited in coments in the code). 
 - Jonah Farkasdi - Made logos and promotional image.
 
 
