@@ -124,7 +124,7 @@ function displayResults() {
                 /*undefined evaluates to false, but when speedSet is undefined it means user has not 
                 tried to apply a speed and the error message below shouldn't be displayed.*/
                 message.innerText = "ERROR: Your speed selection of " + choice + times 
-                + " has not been applied, as no supported videos or audio tracks were found on this page.";     
+                + " has not been applied, as no supported videos or audio clips were found on this page.";     
             }
         });
         chrome.storage.local.remove("speedSet"); //Prevents wrong message being shown on tab switch.

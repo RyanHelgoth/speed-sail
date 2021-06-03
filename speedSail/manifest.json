@@ -1,6 +1,6 @@
 {
-    "name": "Video Speed Selector",
-    "description": "Change the playback speed of all videos and audio tracks in your current tab.",
+    "name": "Speed Sail",
+    "description": "Change the playback speed of videos and audio clips in your current tab.",
     "version": "1.0.0",
     "manifest_version": 3,
     "action": {
@@ -15,5 +15,10 @@
         "http://*/*",
         "https://*/*",
         "file://*/*"  
-    ]
+    ],
+    "icons": { 
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+       "128": "icons/icon128.png" 
+    }
 }
