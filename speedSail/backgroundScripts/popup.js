@@ -1,4 +1,4 @@
-/*All code by Ryan Helgoth unless cited otherwise.
+/*All code written by Ryan Helgoth, any resources used are commented.
 
 This script executes when the extention's popup is opened,
 it handles user input and setting some ui elements.
@@ -39,16 +39,31 @@ function initializeUi() {
     });
 }
 
-//Sets selected speed text.
-function setSelectedSpeedText() {
+//Updates ui elements that should change after slider is moved.
+function updateUi() {
     let selectedSpeed = speedSlider.value;
+    let leftColor = "rgba(200, 200, 200, 0.50)";
+    let rightColor = "rgba(200, 200, 200, 0.25)";
+    let percentFilled = (selectedSpeed/16)*100;
+
     sliderNum.innerText = selectedSpeed;
+    
+    /*  Link: https://stackoverflow.com/a/57153340
+        Author: dargue3
+        Date: Jul 22 '19 at 20:32
+        License: SA 4.0
+
+        I used this post to learn how to fill the left 
+        of a range slider with color in chrome.
+    */
+    speedSlider.style.background = "linear-gradient(to right," + leftColor+" 0%," + leftColor 
+    + percentFilled + "%," + rightColor + percentFilled + "%," + rightColor + "100%)";
 }
 
 //Adds listeners.
 function addListeners() {
     
-    //Catches change in speedSet boolean that tracks if applying speed selection was sucessful or not.
+    //Catches change in speedSet boolean that tracks if applying the speed selection was sucessful or not.
     chrome.storage.onChanged.addListener(displayResults); 
     
     //Catches clicks on apply speed selection button
@@ -58,7 +73,7 @@ function addListeners() {
     defaultButton.addEventListener("click", setDefaultSpeed, false); 
 
     //Catches changes in speed slider position
-    speedSlider.addEventListener("input", setSelectedSpeedText, false);
+    speedSlider.addEventListener("input", updateUi, false);
 }
 
 //Set speed of videos in current tab to the speed the user has selected.
@@ -82,15 +97,20 @@ function setSpeed() {
 
 //Sets slider to speed of 1 and then attempts to apply it to the current tab.
 function setDefaultSpeed() {
+    let leftColor = "rgba(200, 200, 200, 0.50)";
+    let rightColor = "rgba(200, 200, 200, 0.25)";
+    
     speedSlider.value = "1";
     sliderNum.innerText = "1";
+    speedSlider.style.background = "linear-gradient(to right, " + leftColor + " 0%," 
+    + leftColor + "6.25%," + rightColor + " 6.25%," + rightColor + " 100%)";
     setSpeed();
 }
 
-//Displays results after an attempt has been made to apply the user's selected speed to videos in the current tab.
+//Displays results after an attempt has been made to apply the user's selected speed to the current tab.
 function displayResults() {
 
-    //Set time out prevents brief display of error message as speedSet is initially set to false.
+    //Time out prevents brief display of error message as speedSet is initially set to false.
     setTimeout(function() {
         chrome.storage.local.get("speedSet", function(items) {
             let choice = speedSlider.value;
@@ -98,23 +118,24 @@ function displayResults() {
         
             if (items.speedSet) {
                 appliedSpeed.innerText = choice;
-                message.innerText = "Your speed selection of " + choice + times + " has been applied.";  
+                message.innerText = "Your speed selection of " + choice + times + " has been successfully applied.";  
             }
             else if (!items.speedSet && typeof items.speedSet !== "undefined") {
                 /*undefined evaluates to false, but when speedSet is undefined it means user has not 
                 tried to apply a speed and the error message below shouldn't be displayed.*/
-                message.innerText = "ERROR: Your speed selection of " + choice + times + " has not been applied as no valid videos or audio tracks were found on this page.";     
+                message.innerText = "ERROR: Your speed selection of " + choice + times 
+                + " has not been applied, as no supported videos or audio clips were found on this page.";     
             }
         });
         chrome.storage.local.remove("speedSet"); //Prevents wrong message being shown on tab switch.
     }, 50);
 }
 
-//Executes script responsible for setting video speed in the current tab.
+//Executes script responsible for setting speed in the current tab.
 function executeSetSpeedScript(tabs) {
     if (tabs[0].url.startsWith("https://") || tabs[0].url.startsWith("http://") || tabs[0].url.startsWith("file://")) { 
         
-        //speedSet is saved as true if speed is applied to at least one video in the current tab (in setSpeed.js)
+        //speedSet is saved as true if speed is applied to at least one video or audio clip in the current tab (in setSpeed.js)
         chrome.storage.local.set({
             speedSet: false
         });
@@ -124,13 +145,7 @@ function executeSetSpeedScript(tabs) {
         });
     }
     else {
-        message.innerText = "ERROR: Can't set speed, url must start with http://, https://, or file://";
+        message.innerText = "ERROR: Can't set speed, as the URL must start with http://, https://, or file://";
     }
 }
 
-/*TODO:
--Uninstall extension and see if current speed causes bugs (when it is undefined)
--Update issue on github explaining why im not preventing spam clicks anymore
--Move executeSetSpeedScript code into setSpeed?
--Delete unecissary files.
-*/

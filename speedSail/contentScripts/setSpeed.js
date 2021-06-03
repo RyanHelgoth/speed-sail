@@ -1,10 +1,9 @@
-/*All code by Ryan Helgoth unless cited otherwise.
+/*All code written by Ryan Helgoth, any resources used are commented.
 
-This script executes when the user has moved the 
-speed selection slider in the extentions's popup.
-This script sets all the video's on the current
-tab to the speed the user has selected with 
-the slider.
+This script executes when the user has 
+selected a speed in the extentions's popup.
+This script sets all the supported videos and audio tracks 
+on the current tab to the speed the user has selected.
 */
 
 main();
@@ -16,12 +15,6 @@ function main() {
 //Sets speed of all videos and audio tracks in current tab.
 function setVideoSpeed() {
 
-    //TODO remove lines below when done testing
-    chrome.storage.local.get("currentSpeed", function (items) {
-        if (typeof items.currentSpeed !== "undefined") { 
-            console.log("currentSpeed"+items.currentSpeed);
-        }
-    });
     /*  Link: https://stackoverflow.com/a/40666096
         Author: Makyen♦
         Date: Nov 17 '16 at 22:20
@@ -33,7 +26,6 @@ function setVideoSpeed() {
     chrome.storage.local.get("selectedSpeed", function (items) {
         let selectedSpeed = items.selectedSpeed;
         let speedSet = false;
-        console.log("selectedSpeed"+selectedSpeed); //for testing, can remove after done development
         
         //Prevents errors if slider is moved too fast which can leave speed undefined.
         if (typeof selectedSpeed !== "undefined") { 
@@ -65,7 +57,7 @@ function setVideoSpeed() {
     });
 }
 
-//Saves the speed selected by the user in storage if it has been applied to at least one video.
+//Saves the speed selected by the user in storage if it has been applied to at least one video or audio track.
 function saveCurrentSpeed(speedSet, selectedSpeed) {
     if (speedSet) {
         chrome.storage.local.remove("currentSpeed"); 
@@ -74,9 +66,9 @@ function saveCurrentSpeed(speedSet, selectedSpeed) {
         });
 
         /*speedSet needs to only be set to true here because this script
-        is executed once for each iframe. So if the last iframe that is processed
-        contains no videos, then speedSet will be set to false even if there was
-        at least one video that did have it's speed set in a different iframe.
+        is executed once for each frame. So if the last frame that is processed
+        contains no videos or audio clips, then speedSet will be set to false even if there was
+        at least one video that did have it's speed set in a different frame.
         */
         //speedSet is set to false initially in popup.js when user selects a speed.
         chrome.storage.local.set({
