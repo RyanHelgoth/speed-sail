@@ -2,7 +2,7 @@
 - Speed is a Google Chrome extension that allows the user to change the playback speed of videos and audio clips in the current tab.
 
 # Where can I install Speed Sail?
-- Once it is completed, you will be able to install this extension for free from the chrome extension store. The installation link will be posted here when the extension is available.
+- You can install Speed Sail [here](https://chrome.google.com/webstore/detail/femeaeoieikbjdigindknmdgbomjhjop) for free!
 
 # Which websites does Speed Sail support?
 - Speed Sail works on YouTube, Reddit, Twitter, Facebook, and most other websites!  
