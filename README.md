@@ -4,6 +4,9 @@
 # Where can I install Speed Sail?
 - You can install Speed Sail [here](https://chrome.google.com/webstore/detail/femeaeoieikbjdigindknmdgbomjhjop) for free!
 
+# What's new?
+- To check out newly added features you can take a look at the update log [here](https://github.com/RyanHelgoth/speed-sail/wiki/Update-History).
+
 # Which websites does Speed Sail support?
 - Speed Sail works on YouTube, Reddit, Twitter, Facebook, and most other websites!  
 - Speed Sail also should support PDF's, but this has not been tested. 
