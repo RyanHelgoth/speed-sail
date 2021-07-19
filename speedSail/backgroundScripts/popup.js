@@ -26,15 +26,17 @@ function getUiElements() {
 
 //Sets ui elements when popup is opened.
 function initializeUi() {
-    speedSlider.value = "1";
-    sliderNum.innerText = "1";
     message.innerText = "";
     chrome.storage.local.get("currentSpeed", function (items) {
         if (typeof items.currentSpeed !== "undefined") { 
+            speedSlider.value = items.currentSpeed;
             appliedSpeed.innerText = items.currentSpeed;
+            updateUi();
         }
         else {
             appliedSpeed.innerText = "1";
+            speedSlider.value = "1";
+            sliderNum.innerText = "1";
         }
     });
 }
