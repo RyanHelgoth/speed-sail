@@ -137,9 +137,13 @@ body {
 
         I used this post to learn how to fill the left 
         of a range slider in with color in chrome.
+        
+        The 2nd and 3rd percentage come from (3/21) * 100
+        which is the percentage at which 1x speed falls 
+        on the slider.
     */
     background: linear-gradient(to right, rgba(200, 200, 200, 0.50) 0%, 
-    rgba(200, 200, 200, 0.50) 6.25%, rgba(200, 200, 200, 0.25) 6.25%, 
+    rgba(200, 200, 200, 0.50) 14.2857142857%, rgba(200, 200, 200, 0.25) 14.2857142857%, 
     rgba(200, 200, 200, 0.25) 100%);
 }
 
