@@ -6,9 +6,15 @@ it handles user input and setting some ui elements.
 
 main();
 
-function main() {
+async function main() {
+    //chrome.storage.local.remove("version"); //TODO remove this line when done testing
+    await clearOldData(); //Async function to make sure invalid data is cleared before initializing ui.
+    const sliderSpeeds = getSliderSpeeds();
+    /*
     const [speedSlider, sliderNum, appliedSpeed, 
-        applyButton, defaultButton, messgae] = getUiElements();
+        applyButton, defaultButton, messgae] = 
+        */
+    getUiElements();
     initializeUi();
     addListeners(); 
 }
@@ -21,34 +27,78 @@ function getUiElements() {
     const applyButton = document.getElementById("applyButton");
     const defaultButton = document.getElementById("defaultButton");
     const message = document.getElementById("message");
-    return [speedSlider, sliderNum, appliedSpeed, applyButton, defaultButton, message];
+    //return [speedSlider, sliderNum, appliedSpeed, applyButton, defaultButton, message];
+}
+
+//Clears data left over from old version 1.0.0 which is not compatible with new versions.
+async function clearOldData() {
+    return new Promise(function(resolve, reject) {
+         chrome.storage.local.get("version", function(items) {
+            if (typeof items.version === "undefined") {
+                chrome.storage.local.remove(["currentSpeed", "selectedSpeed"], function() {
+                    chrome.storage.local.set({version: "1.1.0"}, function() {
+                        resolve();
+                    });
+                }); 
+            }
+            else {
+                resolve();
+            }
+        });      
+    });       
+}
+
+//Creates array of values of speeds with indexes correspoding to slider position. 
+function getSliderSpeeds() {
+    //https://stackoverflow.com/a/31712438
+    let sliderSpeeds = [];
+    let num = 0.25;
+    let increment = 0.25;
+
+    /*
+    Values in array start at 0.25 and go to 16. 
+    From 0.25 to 2 values are incremented by 0.25.
+    From 2 to 16 values are incremented by 1.
+    */
+    while (num <= 16) {
+        sliderSpeeds.push(num)
+        num += increment;
+        if (num === 2) {
+            increment = 1;
+        }
+    }
+    return sliderSpeeds
 }
 
 //Sets ui elements when popup is opened.
-function initializeUi() {
+async function initializeUi() {
+    const sliderSpeeds = getSliderSpeeds()
     message.innerText = "";
     chrome.storage.local.get("currentSpeed", function (items) {
         if (typeof items.currentSpeed !== "undefined") { 
-            speedSlider.value = items.currentSpeed;
+            let sliderPos = sliderSpeeds.indexOf(items.currentSpeed);
+            speedSlider.value = sliderPos;
             appliedSpeed.innerText = items.currentSpeed;
             updateUi();
         }
         else {
             appliedSpeed.innerText = "1";
-            speedSlider.value = "1";
+            speedSlider.value = "3"; //3rd position of slider corresponds to 1 in the value list.
             sliderNum.innerText = "1";
         }
     });
+    
 }
 
 //Updates ui elements that should change after slider is moved.
 function updateUi() {
-    let selectedSpeed = speedSlider.value;
+    let sliderPos = speedSlider.value;
     let leftColor = "rgba(200, 200, 200, 0.50)";
     let rightColor = "rgba(200, 200, 200, 0.25)";
-    let percentFilled = (selectedSpeed/16)*100;
-
-    sliderNum.innerText = selectedSpeed;
+    let percentFilled = (sliderPos/21)*100;
+   
+    const sliderSpeeds = getSliderSpeeds() //TODO pass in if possible
+    sliderNum.innerText = sliderSpeeds[sliderPos];
     
     /*  Link: https://stackoverflow.com/a/57153340
         Author: dargue3
@@ -80,7 +130,9 @@ function addListeners() {
 
 //Set speed of videos in current tab to the speed the user has selected.
 function setSpeed() {
-    let selectedSpeed = speedSlider.value;
+    const sliderSpeeds = getSliderSpeeds() //TODO pass in if possible
+    let sliderPos = speedSlider.value
+    let selectedSpeed = sliderSpeeds[sliderPos];
     
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         /*  Link: https://stackoverflow.com/a/40666096
@@ -99,13 +151,8 @@ function setSpeed() {
 
 //Sets slider to speed of 1 and then attempts to apply it to the current tab.
 function setDefaultSpeed() {
-    let leftColor = "rgba(200, 200, 200, 0.50)";
-    let rightColor = "rgba(200, 200, 200, 0.25)";
-    
-    speedSlider.value = "1";
-    sliderNum.innerText = "1";
-    speedSlider.style.background = "linear-gradient(to right, " + leftColor + " 0%," 
-    + leftColor + "6.25%," + rightColor + " 6.25%," + rightColor + " 100%)";
+    speedSlider.value = "3"; //3rd position of slider corresponds to 1 in the value list.
+    updateUi();
     setSpeed();
 }
 
@@ -115,7 +162,9 @@ function displayResults() {
     //Time out prevents brief display of error message as speedSet is initially set to false.
     setTimeout(function() {
         chrome.storage.local.get("speedSet", function(items) {
-            let choice = speedSlider.value;
+            const sliderSpeeds = getSliderSpeeds() //TODO pass in if possible
+            let sliderPos = speedSlider.value
+            let choice = sliderSpeeds[sliderPos];
             let times = "\u00D7";
         
             if (items.speedSet) {
